@@ -1,44 +1,35 @@
 #include <stdio.h>
+#include <emmintrin.h> // библиотека для векторизации SIMD
+
+enum{ M = 1024, K = 1024};
 
 int main() {
-   int m, n, k;
-   printf("Введите количество строк и столбцов первой матрицы: ");
-   scanf("%d %d", &m, &n);
-   printf("Введите количество столбцов второй матрицы: ");
-   scanf("%d", &k);
-
-   int matrix1[m][n], matrix2[n][k], result[m][k];
+   int matrix1[M][K], matrix2[K][M], result[M][M];
    int i, j, l;
 
-   printf("\nВведите элементы первой матрицы:\n");
-   for(i = 0; i < m; i++) {
-      for(j = 0; j < n; j++) {
-         scanf("%d", &matrix1[i][j]);
+   // заполнение матриц случайными значениями
+   for(i = 0; i < M; i++) {
+      for(j = 0; j < K; j++) {
+         matrix1[i][j] = rand();
+      }
+   }
+   for(j = 0; j < K; j++) {
+      for(l = 0; l < M; l++) {
+         matrix2[j][l] = rand();
       }
    }
 
-   printf("\nВведите элементы второй матрицы:\n");
-   for(j = 0; j < n; j++) {
-      for(l = 0; l < k; l++) {
-         scanf("%d", &matrix2[j][l]);
-      }
-   }
-
-   for(i = 0; i < m; i++) {
-      for(l = 0; l < k; l++) {
-         result[i][l] = 0;
-         for(j = 0; j < n; j++) {
-            result[i][l] += matrix1[i][j] * matrix2[j][l];
+   __m128i row1, row2, result_row;
+   for(i = 0; i < M; i++) {
+      for(l = 0; l < M; l++) {
+         result_row = _mm_setzero_si128(); // обнуляем регистр результата
+         for(j = 0; j < K; j += 4) { // выполняем операции над 4 элементами одновременно
+            row1 = _mm_loadu_si128((__m128i*)&matrix1[i][j]); // загружаем 4 элемента из первой матрицы
+            row2 = _mm_loadu_si128((__m128i*)&matrix2[j][l]); // загружаем 4 элемента из второй матрицы
+            result_row = _mm_add_epi32(result_row, _mm_mul_epu32(row1, row2)); // выполняем умножение и сложение
          }
+         result[i][l] = result_row[0] + result_row[1] + result_row[2] + result_row[3]; // суммируем результаты
       }
-   }
-
-   printf("\nРезультат умножения матриц:\n");
-   for(i = 0; i < m; i++) {
-      for(j = 0; j < k; j++) {
-         printf("%d ", result[i][j]);
-      }
-      printf("\n");
    }
 
    return 0;
