@@ -10,7 +10,7 @@ int main() {
    int **matrix1 = (int **)malloc(m * sizeof(int *));
    int **matrix2 = (int **)malloc(m * sizeof(int *));
    int **result = (int **)malloc(m * sizeof(int *));
-   for(int i = 0; i < m; i++) {
+   for (int i = 0; i < m; i++) {
       matrix1[i] = (int *)malloc(n * sizeof(int));
       matrix2[i] = (int *)malloc(n * sizeof(int));
       result[i] = (int *)malloc(n * sizeof(int));
@@ -45,7 +45,7 @@ int main() {
       printf("\n");
    }
 
-   for(int i = 0; i < m; i++) {
+   for (int i = 0; i < m; i++) {
       free(matrix1[i]);
       free(matrix2[i]);
       free(result[i]);
@@ -54,5 +54,5 @@ int main() {
    free(matrix2);
    free(result);
 
-return 0;
+   return 0;
 }
