@@ -1,10 +1,9 @@
 #include <stdio.h>
 
-int main()
-{
+int main() {
     int rows, cols, i, j;
 
-    // Получаем размеры матрицы от пользователя
+    
     printf("Введите количество строк: ");
     scanf("%d", &rows);
     printf("Введите количество столбцов: ");
@@ -12,7 +11,7 @@ int main()
 
     int matrix[rows][cols];
 
-    // Получаем элементы матрицы от пользователя
+    
     printf("Введите элементы матрицы:\n");
 
     for (i = 0; i < rows; i++) {
