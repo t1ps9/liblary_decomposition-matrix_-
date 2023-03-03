@@ -1,12 +1,13 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <omp.h>
+#include <stdlib.h> // библиотека для использования функции malloc и free
+#include <omp.h> // библиотека для параллельных вычислений с использованием OpenMP
 
 int main() {
    int m, n;
    printf("Введите количество строк и столбцов матриц: ");
    scanf("%d %d", &m, &n);
 
+   // динамическое выделение памяти для матриц
    int **matrix1 = (int **)malloc(m * sizeof(int *));
    int **matrix2 = (int **)malloc(m * sizeof(int *));
    int **result = (int **)malloc(m * sizeof(int *));
@@ -30,6 +31,7 @@ int main() {
       }
    }
 
+   // параллельное выполнение циклов, которые проходят через матрицы и складывают их элементы
    #pragma omp parallel for
    for(int i = 0; i < m; i++) {
       for(int j = 0; j < n; j++) {
@@ -45,6 +47,7 @@ int main() {
       printf("\n");
    }
 
+   // освобождение памяти, которую мы выделили для матриц
    for (int i = 0; i < m; i++) {
       free(matrix1[i]);
       free(matrix2[i]);
