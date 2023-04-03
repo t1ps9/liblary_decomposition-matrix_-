@@ -13,7 +13,7 @@ int main() {
     printf("Введите количество строк и столбцов: ");
     scanf("%d %d", &rows, &cols);
 
-    int matrix[MAX][MAX], matrix2[MAX][MAX], result[MAX][MAX];
+    int matrix[MAX][MAX], result[MAX][MAX];
     printf("Введите элементы матрицы:\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -21,7 +21,7 @@ int main() {
         }
     }
 
-    
+
     printf("\nТранспонированная матрица:\n");
     transpose(matrix, rows, cols);
 
@@ -38,7 +38,7 @@ int main() {
         }
     }
     int **matrix2;
-    matrix2 = (int **)malloc(rows * sizeof(int *));
+    (int **)malloc(rows * sizeof(int *));
     for (int i = 0; i < rows; i++) {
         matrix2[i] = (int *)malloc(cols * sizeof(int));
     }
@@ -63,7 +63,7 @@ int main() {
     free(matrix1);
     free(matrix2);
 
-    
+
     int m1, n1, m2, n2;
     printf("\nВведите количество строк и столбцов матрицы1: ");
     scanf("%d %d", &m1, &n1);
