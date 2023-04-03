@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-enum{MAX = 100};
+enum { MAX = 100 };
 
 void transpose(int matrix[][MAX], int rows, int cols);
 void matrix_sum(int m, int n, int **matrix1, int **matrix2, int **result);
 void matrix_product(int m, int n, int **matrix1, int **matrix2, int **result);
+int determinant(int matrix[][MAX], int n);
 
 int main() {
     //для транспонирования
@@ -13,14 +14,14 @@ int main() {
     printf("Введите количество строк и столбцов: ");
     scanf("%d %d", &rows, &cols);
 
-    int matrix[MAX][MAX], result[MAX][MAX];
+    int result[MAX][MAX];
     printf("Введите элементы матрицы:\n");
+    int matrix;
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             scanf("%d", &matrix[i][j]);
         }
     }
-
 
     printf("\nТранспонированная матрица:\n");
     transpose(matrix, rows, cols);
@@ -62,7 +63,6 @@ int main() {
     }
     free(matrix1);
     free(matrix2);
-
 
     int m1, n1, m2, n2;
     printf("\nВведите количество строк и столбцов матрицы1: ");
@@ -107,6 +107,11 @@ int main() {
         }
         printf("\n");
     }
+
+    int matrix[MAX][MAX];
+    int det = determinant(matrix, MAX);
+    printf("Определитель матрицы: %d\n", det);
+
     for (int i = 0; i < m1; i++) {
         free(mat1[i]);
         free(mat2[i]);
