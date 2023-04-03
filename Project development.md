@@ -38,6 +38,7 @@
 Реализовано в [transpose.c](https://github.com/t1ps9/liblary_decomposition-matrix_-/blob/main/transpose.c)
 
 К КТ5:
+
 1.Обернули написанные коды в функции
 
 2.Написали main, в котором можно вызвать написанные функции
