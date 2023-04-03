@@ -6,17 +6,19 @@ enum{ M = 1024, K = 1024};
 void matrix_multiply(int matrix1[][K], int matrix2[][M], int result[][M]) {
    int i, j, l;
 
-   // заполнение матриц случайными значениями
-   for(i = 0; i < M; i++) {
-      for(j = 0; j < K; j++) {
-         matrix1[i][j] = rand();
-      }
-   }
-   for(j = 0; j < K; j++) {
-      for(l = 0; l < M; l++) {
-         matrix2[j][l] = rand();
-      }
-   }
+//    // заполнение матриц случайными значениями
+//    for(i = 0; i < M; i++) {
+//       for(j = 0; j < K; j++) {
+//          matrix1[i][j] = rand();
+//       }
+//    }
+//    for(j = 0; j < K; j++) {
+//       for(l = 0; l < M; l++) {
+//          matrix2[j][l] = rand();
+//       }
+//    }
+   
+//    можно оставить рандомное заполнение матриц , а можно и передовать в функцию из main
 
    __m128i row1, row2, result_row;
    for(i = 0; i < M; i++) {
