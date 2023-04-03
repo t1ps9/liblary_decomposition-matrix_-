@@ -37,22 +37,31 @@
 
 Реализовано в [transpose.c](https://github.com/t1ps9/liblary_decomposition-matrix_-/blob/main/transpose.c)
 
-К КТ5:
+К КТ5(все ниже реализованное, сделано после КТ4):
 
-1.Обернули написанные коды в функции
+-Обернули написанные коды в функции
 
-2.Написали main, в котором можно вызвать написанные функции
+функция для суммы - [sum_func.c](https://github.com/t1ps9/liblary_decomposition-matrix_-/blob/main/sum_func.c)
 
-3.Дописали функции, реализованные ниже
+функция для перемножения - [mult_func.C](https://github.com/t1ps9/liblary_decomposition-matrix_-/blob/main/mult_func.C)
 
-4.Изучаем теоритескиую часть алгоритмов, которые используют быстрые операции
+функция для транспонирования - [transpose_func.c](https://github.com/t1ps9/liblary_decomposition-matrix_-/blob/main/transpose_func.c)
+
+функция для нахождения определителя матрицы - [det.c](https://github.com/t1ps9/liblary_decomposition-matrix_-/blob/main/det.c)
+
+
+-Написали main, в котором можно вызвать написанные функции
+[main.c](https://github.com/t1ps9/liblary_decomposition-matrix_-/blob/main/main.c)
+-Дописали функции, реализованные ниже
+
+-Изучаем теоритескиую часть алгоритмов, которые используют быстрые операции
 
 Изученные статьи: 
 - https://habr.com/ru/post/21042/
 - https://habr.com/ru/post/359272/
 
 5) Поиск определителя
-
+Нахождение определителя реализовано в функции [det.c](https://github.com/t1ps9/liblary_decomposition-matrix_-/blob/main/det.c)
 6) Поиск обратной матрицы
 
 7) Ортоганализация столбцов матрицы
