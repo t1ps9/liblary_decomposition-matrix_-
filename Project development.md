@@ -61,6 +61,7 @@
 - https://habr.com/ru/post/359272/
 
 5) Поиск определителя
+
 Нахождение определителя реализовано в функции [det.c](https://github.com/t1ps9/liblary_decomposition-matrix_-/blob/main/det.c)
 6) Поиск обратной матрицы
 
