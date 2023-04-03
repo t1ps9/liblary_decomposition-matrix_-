@@ -1,19 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 100
+enum{MAX = 100};
 
 void transpose(int matrix[][MAX], int rows, int cols);
 void matrix_sum(int m, int n, int **matrix1, int **matrix2, int **result);
 void matrix_product(int m, int n, int **matrix1, int **matrix2, int **result);
 
 int main() {
+    //для транспонирования
     int rows, cols;
-    printf("Enter the number of rows and columns of the matrix: ");
+    printf("Введите количество строк и столбцов: ");
     scanf("%d %d", &rows, &cols);
 
     int matrix[MAX][MAX], matrix2[MAX][MAX], result[MAX][MAX];
-    printf("Enter the elements of the matrix:\n");
+    printf("Введите элементы матрицы:\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             scanf("%d", &matrix[i][j]);
@@ -21,16 +22,16 @@ int main() {
     }
 
     
-    printf("\nTranspose of the matrix:\n");
+    printf("\nТранспонированная матрица:\n");
     transpose(matrix, rows, cols);
 
-    
+    // для суммы матриц
     int **matrix1;
     matrix1 = (int **)malloc(rows * sizeof(int *));
     for (int i = 0; i < rows; i++) {
         matrix1[i] = (int *)malloc(cols * sizeof(int));
     }
-    printf("\nEnter the elements of matrix1:\n");
+    printf("\nВведите элементы матрицы1:\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             scanf("%d", &matrix1[i][j]);
@@ -41,14 +42,14 @@ int main() {
     for (int i = 0; i < rows; i++) {
         matrix2[i] = (int *)malloc(cols * sizeof(int));
     }
-    printf("\nEnter the elements of matrix2:\n");
+    printf("\nВведите элементы матрицы2:\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             scanf("%d", &matrix2[i][j]);
         }
     }
     matrix_sum(rows, cols, matrix1, matrix2, result);
-    printf("\nMatrix sum:\n");
+    printf("\nСумма матриц:\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             printf("%d ", result[i][j]);
@@ -64,9 +65,9 @@ int main() {
 
     
     int m1, n1, m2, n2;
-    printf("\nEnter the number of rows and columns of matrix1: ");
+    printf("\nВведите количество строк и столбцов матрицы1: ");
     scanf("%d %d", &m1, &n1);
-    printf("Enter the elements of matrix1:\n");
+    printf("Введите элементы матрицы1:\n");
     int **mat1 = (int **)malloc(m1 * sizeof(int *));
     for (int i = 0; i < m1; i++) {
         mat1[i] = (int *)malloc(n1 * sizeof(int));
@@ -76,14 +77,15 @@ int main() {
             scanf("%d", &mat1[i][j]);
         }
     }
-    printf("\nEnter the number of rows and columns of matrix2: ");
+    printf("\nВведите количество строк и столбцов матрицы2: ");
     scanf("%d %d", &m2, &n2);
     if (n1 != m2) {
         printf("Error: Number of columns in matrix1 should be equal to number "
                "of rows in matrix2.\n");
         return 0;
     }
-    printf("Enter the elements of matrix2:\n");
+    printf("Введите элементы матрицы2:\n");
+    //для умножения матриц
     int **mat2 = (int **)malloc(m2 * sizeof(int *));
     for (int i = 0; i < m2; i++) {
         mat2[i] = (int *)malloc(n2 * sizeof(int));
@@ -98,7 +100,7 @@ int main() {
         res[i] = (int *)malloc(n2 * sizeof(int));
     }
     matrix_product(m1, n2, mat1, mat2, res);
-    printf("\nMatrix product:\n");
+    printf("\nРезультат:\n");
     for (int i = 0; i < m1; i++) {
         for (int j = 0; j < n2; j++) {
             printf("%d ", res[i][j]);
