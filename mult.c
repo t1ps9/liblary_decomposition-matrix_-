@@ -1,36 +1,20 @@
-#include <stdio.h>
-#include <emmintrin.h> // библиотека для векторизации SIMD
+// Function to multiply two matrices
+Matrix* multiplyMatrix(Matrix* m1, Matrix* m2) {
+    if(m1->cols != m2->rows) {
+        printf("Error: The number of columns in the first matrix must be equal to the number of rows in the second matrix for multiplication.\n");
+        return NULL;
+    }
 
-enum{ M = 1024, K = 1024};
+    Matrix* result = createMatrix(m1->rows, m2->cols);
 
-int main() {
-   int matrix1[M][K], matrix2[K][M], result[M][M];
-   int i, j, l;
+    for(int i = 0; i < m1->rows; i++) {
+        for(int j = 0; j < m2->cols; j++) {
+            result->data[i][j] = 0;
+            for(int k = 0; k < m1->cols; k++) {
+                result->data[i][j] += m1->data[i][k] * m2->data[k][j];
+            }
+        }
+    }
 
-   // заполнение матриц случайными значениями
-   for(i = 0; i < M; i++) {
-      for(j = 0; j < K; j++) {
-         matrix1[i][j] = rand();
-      }
-   }
-   for(j = 0; j < K; j++) {
-      for(l = 0; l < M; l++) {
-         matrix2[j][l] = rand();
-      }
-   }
-
-   __m128i row1, row2, result_row;
-   for(i = 0; i < M; i++) {
-      for(l = 0; l < M; l++) {
-         result_row = _mm_setzero_si128(); // обнуляем регистр результата
-         for(j = 0; j < K; j += 4) { // выполняем операции над 4 элементами одновременно
-            row1 = _mm_loadu_si128((__m128i*)&matrix1[i][j]); // загружаем 4 элемента из первой матрицы
-            row2 = _mm_loadu_si128((__m128i*)&matrix2[j][l]); // загружаем 4 элемента из второй матрицы
-            result_row = _mm_add_epi32(result_row, _mm_mul_epu32(row1, row2)); // выполняем умножение и сложение
-         }
-         result[i][l] = result_row[0] + result_row[1] + result_row[2] + result_row[3]; // суммируем результаты
-      }
-   }
-
-   return 0;
+    return result;
 }
