@@ -1,22 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <omp.h>
+// Function to add two matrices
+Matrix* addMatrix(Matrix* m1, Matrix* m2) {
+    if(m1->rows != m2->rows || m1->cols != m2->cols) {
+        printf("Error: Matrices must have the same dimensions for addition.\n");
+        return NULL;
+    }
 
-void matrix_sum(int m, int n, int **matrix1, int **matrix2, int **result) {
-//     printf("Заполнение матриц случайными значениями...\n");
-//     for (int i = 0; i < m; i++) {
-//         for (int j = 0; j < n; j++) {
-//             matrix1[i][j] = rand() % 10;
-//             matrix2[i][j] = rand() % 10;
-//         }
-//     }
-    
-    //    можно оставить рандомное заполнение матриц , а можно и передовать в функцию из main
+    Matrix* result = createMatrix(m1->rows, m1->cols);
 
-    #pragma omp parallel for
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            result[i][j] = matrix1[i][j] + matrix2[i][j];
+    for(int i = 0; i < m1->rows; i++) {
+        for(int j = 0; j < m1->cols; j++) {
+            result->data[i][j] = m1->data[i][j] + m2->data[i][j];
         }
     }
+
+    return result;
 }
